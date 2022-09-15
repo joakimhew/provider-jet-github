@@ -19,7 +19,6 @@ package clients
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
@@ -39,15 +38,25 @@ const (
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal github credentials as JSON"
 
-  keyBaseURL = "base_url"
-  keyOwner = "owner"
-  keyToken = "token"
-
-  // GitHub credentials environment variable names
-  envToken = "GITHUB_TOKEN"
-
-	fmtEnvVar = "%s=%s"
+	keyOwner                 = "owner"
+	keyToken                 = "token"
+	keyAppAuth               = "app_auth"
+	keyAppAuthId             = "id"
+	keyAppAuthInstallationId = "installation_id"
+	keyAppAuthPemFile        = "pem_file"
 )
+
+type appAuth struct {
+	Id             string `json:"id"`
+	InstallationId string `json:"installation_id"`
+	PemFile        string `json:"pem_file"`
+}
+
+type configuration struct {
+	Owner   *string  `json:"owner"`
+	Token   *string  `json:"token"`
+	AppAuth *appAuth `json:"app_auth"`
+}
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
 // returns Terraform provider setup configuration
@@ -79,21 +88,26 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if err != nil {
 			return ps, errors.Wrap(err, errExtractCredentials)
 		}
-		githubCreds := map[string]string{}
+		githubCreds := configuration{}
 		if err := json.Unmarshal(data, &githubCreds); err != nil {
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
 		ps.Configuration = map[string]interface{}{}
-		if v, ok := githubCreds[keyBaseURL]; ok {
-				ps.Configuration[keyBaseURL] = v
+		if githubCreds.Owner != nil {
+			ps.Configuration[keyOwner] = *githubCreds.Owner
 		}
-		if v, ok := githubCreds[keyOwner]; ok {
-				ps.Configuration[keyOwner] = v
+
+		if githubCreds.Token != nil {
+			ps.Configuration[keyToken] = *githubCreds.Token
 		}
-		// set environment variables for sensitive provider configuration
-		ps.Env = []string{
-				fmt.Sprintf(fmtEnvVar, envToken, githubCreds[keyToken]),
+
+		if githubCreds.AppAuth != nil {
+			ps.Configuration[keyAppAuth] = map[string]interface{}{
+				keyAppAuthId:             githubCreds.AppAuth.Id,
+				keyAppAuthInstallationId: githubCreds.AppAuth.InstallationId,
+				keyAppAuthPemFile:        githubCreds.AppAuth.PemFile,
+			}
 		}
 
 		return ps, nil
