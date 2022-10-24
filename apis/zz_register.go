@@ -24,6 +24,7 @@ import (
 
 	v1alpha1 "github.com/joakimhew/provider-jet-github/apis/membership/v1alpha1"
 	v1alpha1repository "github.com/joakimhew/provider-jet-github/apis/repository/v1alpha1"
+	v1alpha1secrets "github.com/joakimhew/provider-jet-github/apis/secrets/v1alpha1"
 	v1alpha1team "github.com/joakimhew/provider-jet-github/apis/team/v1alpha1"
 	v1alpha1apis "github.com/joakimhew/provider-jet-github/apis/v1alpha1"
 )
@@ -33,6 +34,7 @@ func init() {
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1repository.SchemeBuilder.AddToScheme,
+		v1alpha1secrets.SchemeBuilder.AddToScheme,
 		v1alpha1team.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 	)

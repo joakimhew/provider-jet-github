@@ -24,6 +24,7 @@ import (
 	membership "github.com/joakimhew/provider-jet-github/internal/controller/membership/membership"
 	providerconfig "github.com/joakimhew/provider-jet-github/internal/controller/providerconfig"
 	repository "github.com/joakimhew/provider-jet-github/internal/controller/repository/repository"
+	actionssecret "github.com/joakimhew/provider-jet-github/internal/controller/secrets/actionssecret"
 	team "github.com/joakimhew/provider-jet-github/internal/controller/team/team"
 	teammembers "github.com/joakimhew/provider-jet-github/internal/controller/team/teammembers"
 	teammembership "github.com/joakimhew/provider-jet-github/internal/controller/team/teammembership"
@@ -37,6 +38,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		membership.Setup,
 		providerconfig.Setup,
 		repository.Setup,
+		actionssecret.Setup,
 		team.Setup,
 		teammembers.Setup,
 		teammembership.Setup,
