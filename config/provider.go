@@ -21,14 +21,15 @@ import (
 	_ "embed"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	actionssecret "github.com/joakimhew/provider-jet-github/config/actions_secret"
 	"github.com/joakimhew/provider-jet-github/config/membership"
 	"github.com/joakimhew/provider-jet-github/config/repository"
 	"github.com/joakimhew/provider-jet-github/config/team"
-	teammembership "github.com/joakimhew/provider-jet-github/config/team_membership"
 
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
+	actionsenvironmentsecret "github.com/joakimhew/provider-jet-github/config/actions_environment_secret"
+	actionssecret "github.com/joakimhew/provider-jet-github/config/actions_secret"
 	teammembers "github.com/joakimhew/provider-jet-github/config/team_members"
+	teammembership "github.com/joakimhew/provider-jet-github/config/team_membership"
 	teamrepository "github.com/joakimhew/provider-jet-github/config/team_repository"
 )
 
@@ -59,6 +60,7 @@ func GetProvider() *tjconfig.Provider {
 			"github_team_members$",
 			"github_team_membership$",
 			"github_actions_secret$",
+			"github_actions_environment_secret$",
 		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
@@ -69,6 +71,7 @@ func GetProvider() *tjconfig.Provider {
 		teammembers.Configure,
 		teammembership.Configure,
 		actionssecret.Configure,
+		actionsenvironmentsecret.Configure,
 	} {
 		configure(pc)
 	}

@@ -49,7 +49,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
 		managed.WithFinalizer(terraform.NewWorkspaceFinalizer(o.WorkspaceStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
 		managed.WithTimeout(3*time.Minute),
-		managed.WithPollInterval(o.PollInterval),
 		managed.WithInitializers(initializers),
 		managed.WithConnectionPublishers(cps...),
 	)

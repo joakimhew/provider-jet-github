@@ -25,6 +25,7 @@ import (
 	providerconfig "github.com/joakimhew/provider-jet-github/internal/controller/providerconfig"
 	repository "github.com/joakimhew/provider-jet-github/internal/controller/repository/repository"
 	actionssecret "github.com/joakimhew/provider-jet-github/internal/controller/secrets/actionssecret"
+	environmentsecret "github.com/joakimhew/provider-jet-github/internal/controller/secrets/environmentsecret"
 	team "github.com/joakimhew/provider-jet-github/internal/controller/team/team"
 	teammembers "github.com/joakimhew/provider-jet-github/internal/controller/team/teammembers"
 	teammembership "github.com/joakimhew/provider-jet-github/internal/controller/team/teammembership"
@@ -39,6 +40,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		providerconfig.Setup,
 		repository.Setup,
 		actionssecret.Setup,
+		environmentsecret.Setup,
 		team.Setup,
 		teammembers.Setup,
 		teammembership.Setup,
