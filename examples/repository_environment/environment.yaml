@@ -1,0 +1,13 @@
+apiVersion: environment.github.jet.crossplane.io/v1alpha1
+kind: RepositoryEnvironment
+metadata:
+  name: hello-crossplane
+spec:
+  forProvider:
+    environment: test
+    repository: hello-crossplane
+    reviewers:
+      - teamsRefs:
+          - name: test-team
+  providerConfigRef:
+    name: github-provider-config

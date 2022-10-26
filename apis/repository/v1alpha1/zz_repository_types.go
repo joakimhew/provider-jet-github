@@ -25,15 +25,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BranchesObservation struct {
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	Protected *bool `json:"protected,omitempty" tf:"protected,omitempty"`
-}
-
-type BranchesParameters struct {
-}
-
 type PagesObservation struct {
 	Custom404 *bool `json:"custom404,omitempty" tf:"custom_404,omitempty"`
 
@@ -54,8 +45,6 @@ type PagesParameters struct {
 }
 
 type RepositoryObservation struct {
-	Branches []BranchesObservation `json:"branches,omitempty" tf:"branches,omitempty"`
-
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	FullName *string `json:"fullName,omitempty" tf:"full_name,omitempty"`
@@ -138,10 +127,22 @@ type RepositoryParameters struct {
 	LicenseTemplate *string `json:"licenseTemplate,omitempty" tf:"license_template,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	MergeCommitMessage *string `json:"mergeCommitMessage,omitempty" tf:"merge_commit_message,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MergeCommitTitle *string `json:"mergeCommitTitle,omitempty" tf:"merge_commit_title,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	Pages []PagesParameters `json:"pages,omitempty" tf:"pages,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Private *bool `json:"private,omitempty" tf:"private,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SquashMergeCommitMessage *string `json:"squashMergeCommitMessage,omitempty" tf:"squash_merge_commit_message,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SquashMergeCommitTitle *string `json:"squashMergeCommitTitle,omitempty" tf:"squash_merge_commit_title,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Template []TemplateParameters `json:"template,omitempty" tf:"template,omitempty"`

@@ -227,7 +227,7 @@ func (in *TeamMembersParameters) DeepCopyInto(out *TeamMembersParameters) {
 	if in.TeamIDRef != nil {
 		in, out := &in.TeamIDRef, &out.TeamIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TeamIDSelector != nil {
 		in, out := &in.TeamIDSelector, &out.TeamIDSelector
@@ -380,7 +380,7 @@ func (in *TeamMembershipParameters) DeepCopyInto(out *TeamMembershipParameters) 
 	if in.TeamIDRef != nil {
 		in, out := &in.TeamIDRef, &out.TeamIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TeamIDSelector != nil {
 		in, out := &in.TeamIDSelector, &out.TeamIDSelector
@@ -623,7 +623,7 @@ func (in *TeamRepositoryParameters) DeepCopyInto(out *TeamRepositoryParameters) 
 	if in.RepositoryRef != nil {
 		in, out := &in.RepositoryRef, &out.RepositoryRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RepositorySelector != nil {
 		in, out := &in.RepositorySelector, &out.RepositorySelector
@@ -638,7 +638,7 @@ func (in *TeamRepositoryParameters) DeepCopyInto(out *TeamRepositoryParameters) 
 	if in.TeamIDRef != nil {
 		in, out := &in.TeamIDRef, &out.TeamIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TeamIDSelector != nil {
 		in, out := &in.TeamIDSelector, &out.TeamIDSelector

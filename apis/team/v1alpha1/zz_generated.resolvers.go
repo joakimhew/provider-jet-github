@@ -45,7 +45,11 @@ func (mg *TeamMembers) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TeamID")
 	}
-	mg.Spec.ForProvider.TeamID = reference.ToPtrValue(rsp.ResolvedValue)
+	var vTeamID *string
+	if reference.ToPtrValue(rsp.ResolvedValue, vTeamID) != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TeamID")
+	}
+	mg.Spec.ForProvider.TeamID = vTeamID
 	mg.Spec.ForProvider.TeamIDRef = rsp.ResolvedReference
 
 	return nil
@@ -71,7 +75,11 @@ func (mg *TeamMembership) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TeamID")
 	}
-	mg.Spec.ForProvider.TeamID = reference.ToPtrValue(rsp.ResolvedValue)
+	var vTeamID *string
+	if err := reference.ToPtrValue(rsp.ResolvedValue, vTeamID); err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TeamID")
+	}
+	mg.Spec.ForProvider.TeamID = vTeamID
 	mg.Spec.ForProvider.TeamIDRef = rsp.ResolvedReference
 
 	return nil
@@ -97,7 +105,11 @@ func (mg *TeamRepository) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.Repository")
 	}
-	mg.Spec.ForProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
+	var vRepository *string
+	if reference.ToPtrValue(rsp.ResolvedValue, vRepository) != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Repository")
+	}
+	mg.Spec.ForProvider.Repository = vRepository
 	mg.Spec.ForProvider.RepositoryRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -113,7 +125,11 @@ func (mg *TeamRepository) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TeamID")
 	}
-	mg.Spec.ForProvider.TeamID = reference.ToPtrValue(rsp.ResolvedValue)
+	var vTeamID *string
+	if reference.ToPtrValue(rsp.ResolvedValue, vTeamID) != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TeamID")
+	}
+	mg.Spec.ForProvider.TeamID = vTeamID
 	mg.Spec.ForProvider.TeamIDRef = rsp.ResolvedReference
 
 	return nil

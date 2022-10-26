@@ -1,6 +1,10 @@
 module github.com/joakimhew/provider-jet-github
 
-go 1.17
+go 1.18
+
+replace github.com/crossplane/crossplane-runtime => /Users/joakim/repositories/crossplane-runtime
+
+replace github.com/crossplane/crossplane-tools => /Users/joakim/repositories/crossplane-tools
 
 require (
 	github.com/crossplane/crossplane-runtime v0.15.1-0.20220315141414-988c9ba9c255

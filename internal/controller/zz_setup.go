@@ -21,6 +21,7 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/controller"
 
+	repositoryenvironment "github.com/joakimhew/provider-jet-github/internal/controller/environment/repositoryenvironment"
 	membership "github.com/joakimhew/provider-jet-github/internal/controller/membership/membership"
 	providerconfig "github.com/joakimhew/provider-jet-github/internal/controller/providerconfig"
 	repository "github.com/joakimhew/provider-jet-github/internal/controller/repository/repository"
@@ -36,6 +37,7 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		repositoryenvironment.Setup,
 		membership.Setup,
 		providerconfig.Setup,
 		repository.Setup,

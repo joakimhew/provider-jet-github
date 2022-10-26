@@ -45,7 +45,11 @@ func (mg *ActionsSecret) ResolveReferences(ctx context.Context, c client.Reader)
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.Repository")
 	}
-	mg.Spec.ForProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
+	var vRepository *string
+	if reference.ToPtrValue(rsp.ResolvedValue, vRepository) != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Repository")
+	}
+	mg.Spec.ForProvider.Repository = vRepository
 	mg.Spec.ForProvider.RepositoryRef = rsp.ResolvedReference
 
 	return nil
@@ -71,7 +75,11 @@ func (mg *EnvironmentSecret) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.Repository")
 	}
-	mg.Spec.ForProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
+	var vRepository *string
+	if reference.ToPtrValue(rsp.ResolvedValue, vRepository) != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Repository")
+	}
+	mg.Spec.ForProvider.Repository = vRepository
 	mg.Spec.ForProvider.RepositoryRef = rsp.ResolvedReference
 
 	return nil

@@ -136,7 +136,7 @@ func (in *ActionsSecretParameters) DeepCopyInto(out *ActionsSecretParameters) {
 	if in.RepositoryRef != nil {
 		in, out := &in.RepositoryRef, &out.RepositoryRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RepositorySelector != nil {
 		in, out := &in.RepositorySelector, &out.RepositorySelector
@@ -309,7 +309,7 @@ func (in *EnvironmentSecretParameters) DeepCopyInto(out *EnvironmentSecretParame
 	if in.RepositoryRef != nil {
 		in, out := &in.RepositoryRef, &out.RepositoryRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RepositorySelector != nil {
 		in, out := &in.RepositorySelector, &out.RepositorySelector

@@ -7,10 +7,10 @@ PROJECT_REPO := github.com/joakimhew/$(PROJECT_NAME)
 export TERRAFORM_VERSION := 1.2.7
 
 export TERRAFORM_PROVIDER_SOURCE := integrations/github
-export TERRAFORM_PROVIDER_VERSION := 4.29.0
+export TERRAFORM_PROVIDER_VERSION := 5.6.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-github
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://releases.hashicorp.com/terraform-provider-github/4.29.0
-export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-github_v4.29.0
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://releases.hashicorp.com/terraform-provider-github/5.6.0
+export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-github_v5.6.0
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
